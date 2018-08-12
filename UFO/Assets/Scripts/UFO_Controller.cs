@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFO_Controller : MonoBehaviour {
 
-    public GameObject cutOutRectangle, cutOutCylinder;
+    public GameObject cutOutRectangle, cutOutPlus;
     private GameObject activeCutOut;
     public bool isFirstPlayer;
 
@@ -38,7 +38,7 @@ public class UFO_Controller : MonoBehaviour {
                 RotateCutOut();
             }
             if(Input.GetKeyDown(KeyCode.F)){
-                activeCutOut.GetComponent<CropCutter>().DestroyCrops();
+                activeCutOut.GetComponent<CutOutController>().CallDestroyCrops();
             }
         } else {
             if (Input.GetKeyDown(KeyCode.I)){
@@ -60,7 +60,7 @@ public class UFO_Controller : MonoBehaviour {
                 RotateCutOut();
             }
             if(Input.GetKeyDown(KeyCode.H)){
-                activeCutOut.GetComponent<CropCutter>().DestroyCrops();
+                activeCutOut.GetComponent<CutOutController>().CallDestroyCrops();
             }
         }
 	}
@@ -68,7 +68,7 @@ public class UFO_Controller : MonoBehaviour {
     void ChangeCutOut(){
         activeCutOut.SetActive(false);
         if(activeCutOut == cutOutRectangle){
-            activeCutOut = cutOutCylinder;
+            activeCutOut = cutOutPlus;
         } else {
             activeCutOut = cutOutRectangle;
         }
