@@ -5,13 +5,13 @@ using UnityEngine;
 public class UFO_Controller : MonoBehaviour {
 
     public GameObject cutOutRectangle, cutOutPlus;
-    private GameObject activeCutOut;
+    public GameObject activeCutOut;
     public bool isFirstPlayer;
 
 	// Use this for initialization
 	void Start () {
         cutOutRectangle.SetActive(true);
-        cutOutRectangle.SetActive(false);
+        cutOutPlus.SetActive(false);
         activeCutOut = cutOutRectangle;
 	}
 	

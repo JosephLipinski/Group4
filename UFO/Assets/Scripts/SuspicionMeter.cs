@@ -9,29 +9,28 @@ public class SuspicionMeter: MonoBehaviour {
     public Color color;
 
     Image meter;
-    float time;
+    float suspicionLevel;
     int currentLevel = 1;
-
-
 
 	// Use this for initialization
 	void Start () {
         meter = GetComponent<Image>();
         meter.fillAmount = 0;
-
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        time += currentLevel * 0.1f * Time.deltaTime / 100;
-        meter.fillAmount = time;
-        if(time <= 1){
-            meterText.text = "Suspicion Level: " + Mathf.Floor(time * 100).ToString() + "%";
-            color = Color.Lerp(Color.white, Color.black, Mathf.Floor(time / 10));
+        suspicionLevel += currentLevel * 0.1f * Time.deltaTime / 100;
+        meter.fillAmount = suspicionLevel;
+        if(suspicionLevel <= 1){
+            meterText.text = "Suspicion Level: " + Mathf.Floor(suspicionLevel * 100).ToString() + "%";
+            //color = Color.Lerp(Color.white, Color.black, Mathf.Floor(suspicionLevel / 10));
         } else {
             meterText.text = "Suspicion Level: 100%";
         }
-       
-	}
+    }
+
+    public void Seen(){
+        suspicionLevel += 0.1f;
+    }
 }

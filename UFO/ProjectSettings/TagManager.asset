@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Crop
+  - Farmer
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Players
+  - Farmer
+  - Crop
+  - PatrolPoint
   - 
   - 
   - 

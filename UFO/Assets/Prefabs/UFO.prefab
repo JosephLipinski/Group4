@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutOutRectangle: {fileID: 1376894998298380}
   cutOutPlus: {fileID: 1064071309520606}
+  activeCutOut: {fileID: 0}
   isFirstPlayer: 1
 --- !u!114 &114229426041233590
 MonoBehaviour:
