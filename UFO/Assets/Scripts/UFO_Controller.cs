@@ -4,78 +4,110 @@ using UnityEngine;
 
 public class UFO_Controller : MonoBehaviour {
 
-    public GameObject cutOutRectangle, cutOutPlus;
-    public GameObject activeCutOut;
+    [HideInInspector]
+    public GameObject cutOutSquare, cutOutCircle, cutOutLine;
+    public List<GameObject> stencils = new List<GameObject>(6);
+    public int currentStencilIndex;
     public bool isFirstPlayer;
+    public float moveSpeed = 5f;
 
 	// Use this for initialization
 	void Start () {
-        cutOutRectangle.SetActive(true);
-        cutOutPlus.SetActive(false);
-        activeCutOut = cutOutRectangle;
+        stencils.Insert(0, cutOutSquare);
+        stencils.Insert(1, cutOutCircle);
+        stencils.Insert(2, cutOutLine);
+        SetActive();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        Vector3 movementVector = Vector3.zero;
         if (isFirstPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.W)){
-                transform.Translate(Vector3.forward);
+            if (Input.GetKey(KeyCode.W)){
+                movementVector += Vector3.forward;
             }
-            if (Input.GetKeyDown(KeyCode.A)){
-                transform.Translate(Vector3.left);
+            if (Input.GetKey(KeyCode.A)){
+                movementVector += Vector3.left;
             }
-            if (Input.GetKeyDown(KeyCode.S)){
-                transform.Translate(Vector3.back);
+            if (Input.GetKey(KeyCode.S)){
+                movementVector += Vector3.back;
             }
-            if (Input.GetKeyDown(KeyCode.D)){
-                transform.Translate(Vector3.right);
+            if (Input.GetKey(KeyCode.D)){
+                movementVector += Vector3.right;
             }
             if(Input.GetKeyDown(KeyCode.LeftShift)){
                 ChangeCutOut();
+                SetActive();
             }
-            if (Input.GetKeyDown(KeyCode.Q)){
-                RotateCutOut();
+            if (Input.GetKey(KeyCode.Q)){
+                RotateCutOutLeft();
+            }
+            if(Input.GetKey(KeyCode.E)){
+                RotateCutOutRight();
             }
             if(Input.GetKeyDown(KeyCode.F)){
-                activeCutOut.GetComponent<CutOutController>().CallDestroyCrops();
+                stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
             }
         } else {
-            if (Input.GetKeyDown(KeyCode.I)){
-                transform.Translate(Vector3.forward);
+            if (Input.GetKey(KeyCode.I))
+            {
+                movementVector += Vector3.forward;
             }
-            if (Input.GetKeyDown(KeyCode.J)){
-                transform.Translate(Vector3.left);
+            if (Input.GetKey(KeyCode.J))
+            {
+                movementVector += Vector3.left;
             }
-            if (Input.GetKeyDown(KeyCode.K)){
-                transform.Translate(Vector3.back);
+            if (Input.GetKey(KeyCode.K))
+            {
+                movementVector += Vector3.back;
             }
-            if (Input.GetKeyDown(KeyCode.L)){
-                transform.Translate(Vector3.right);
+            if (Input.GetKey(KeyCode.L))
+            {
+                movementVector += Vector3.right;
             }
             if(Input.GetKeyDown(KeyCode.RightShift)){
                 ChangeCutOut();
+                SetActive();
             }
-            if(Input.GetKeyDown(KeyCode.U)){
-                RotateCutOut();
+            if(Input.GetKey(KeyCode.U)){
+                RotateCutOutLeft();
+            }
+            if (Input.GetKey(KeyCode.O))
+            {
+                RotateCutOutRight();
             }
             if(Input.GetKeyDown(KeyCode.H)){
-                activeCutOut.GetComponent<CutOutController>().CallDestroyCrops();
+                stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
             }
         }
+        transform.Translate(movementVector * moveSpeed * Time.deltaTime);
 	}
 
     void ChangeCutOut(){
-        activeCutOut.SetActive(false);
-        if(activeCutOut == cutOutRectangle){
-            activeCutOut = cutOutPlus;
+        if (currentStencilIndex < stencils.Count - 1){
+            currentStencilIndex++;
         } else {
-            activeCutOut = cutOutRectangle;
+            currentStencilIndex = 0;
         }
-        activeCutOut.SetActive(true);
     }
 
-    void RotateCutOut(){
-        activeCutOut.transform.Rotate(new Vector3(0, 90, 0));
+    void SetActive(){
+        for (int i = 0; i < stencils.Count; i++){
+            if (i == currentStencilIndex){
+                stencils[i].SetActive(true);
+            } else {
+                stencils[i].SetActive(false);
+            }
+        }
+            
+            
+        
+    }
+    void RotateCutOutLeft(){
+        stencils[currentStencilIndex].transform.Rotate(new Vector3(0, 0, -90 * Time.deltaTime));
+    }
+    void RotateCutOutRight(){
+        stencils[currentStencilIndex].transform.Rotate(new Vector3(0, 0, 90 * Time.deltaTime));
     }
 }
