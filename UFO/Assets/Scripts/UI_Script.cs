@@ -15,12 +15,10 @@ public class UI_Script : MonoBehaviour {
 	}
 
     public void ViewControlls(){
-        panelOne.SetActive(false);
-        panelTwo.SetActive(true);
+        SceneManager.LoadScene("ControlsScreen");
     }
     public void Back(){
-        panelOne.SetActive(true);
-        panelTwo.SetActive(false);
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void StartGame(){

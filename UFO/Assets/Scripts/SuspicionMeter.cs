@@ -7,6 +7,7 @@ public class SuspicionMeter: MonoBehaviour {
 
     public Text meterText;
     public Color color;
+    public bool hasBeenSeen = true;
 
     Image meter;
     float suspicionLevel;
@@ -20,14 +21,22 @@ public class SuspicionMeter: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        suspicionLevel += currentLevel * 0.1f * Time.deltaTime / 100;
-        meter.fillAmount = suspicionLevel;
-        if(suspicionLevel <= 1){
-            meterText.text = "Suspicion Level: " + Mathf.Floor(suspicionLevel * 100).ToString() + "%";
-            //color = Color.Lerp(Color.white, Color.black, Mathf.Floor(suspicionLevel / 10));
-        } else {
-            meterText.text = "Suspicion Level: 100%";
+        if(hasBeenSeen){
+            suspicionLevel += currentLevel * 0.1f * Time.deltaTime / 100;
+            meter.fillAmount = suspicionLevel;
+            if (suspicionLevel <= 1)
+            {
+                meterText.text = "Suspicion Level: " + Mathf.Floor(suspicionLevel * 100).ToString() + "%";
+                //color = Color.Lerp(Color.white, Color.black, Mathf.Floor(suspicionLevel / 10));
+            }
+            else
+            {
+                meterText.text = "Suspicion Level: 100%";
+                ScoreManager.instance.UpdateScore(-20f);
+                hasBeenSeen = !hasBeenSeen;
+            }
         }
+
     }
 
     public void Seen(){
