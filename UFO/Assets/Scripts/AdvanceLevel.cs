@@ -5,9 +5,11 @@ using UnityEngine;
 public class AdvanceLevel : MonoBehaviour {
 
 	int collidingPlayers = 0;
+    List<Score> scores = new List<Score>();
 
     private void Update(){
         if(collidingPlayers == 2){
+            
             LevelManager.instance.NextLevel();
             Destroy(gameObject);
         }

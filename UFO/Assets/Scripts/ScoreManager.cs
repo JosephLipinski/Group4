@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour {
     
     public static ScoreManager instance = null;
-    [HideInInspector]
-    public float score;
-    public Text scoreText;
+    public int score;
+    //public Text scoreText;
 
     private void Awake()
     {
@@ -21,14 +20,19 @@ public class ScoreManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        score = 0;
-        scoreText = GameObject.Find("Canvas/suspicionBar/ScoreText").GetComponent<Text>();
-        scoreText.text = "Score: " + score.ToString();
+        //scoreText = GameObject.Find("Canvas/suspicionBar/ScoreText").GetComponent<Text>();
+        //scoreText.text = "Score: " + score.ToString();
         DontDestroyOnLoad(gameObject);
 	}
 
-    public void UpdateScore(float scoreToApply){
+    public void UpdateScore(int scoreToApply){
         score += scoreToApply;
-        scoreText.text = "Score: " + score.ToString();
+        Debug.Log("HER");
+        //scoreText = GameObject.Find("Canvas/suspicionBar/ScoreText").GetComponent<Text>();
+       // scoreText.text = "Score: " + score.ToString();
+    }
+
+    public float GetScore(){
+        return score;
     }
 }

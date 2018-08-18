@@ -33,7 +33,7 @@ public class SuspicionMeter: MonoBehaviour {
             else
             {
                 meterText.text = "Suspicion Level: 100%";
-                ScoreManager.instance.UpdateScore(-20f);
+                ScoreManager.instance.UpdateScore(-20);
                 hasBeenSeen = !hasBeenSeen;
             }
         }

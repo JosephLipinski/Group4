@@ -20,9 +20,9 @@ public class Score : MonoBehaviour {
     private void OnDestroy()
     {
         if(ShouldBeDeleted){
-            ScoreManager.instance.UpdateScore(1.0f);
+            ScoreManager.instance.UpdateScore(1);
         } else {
-            ScoreManager.instance.UpdateScore(-1.0f);
+            ScoreManager.instance.UpdateScore(-1);
         }
     }
 }
