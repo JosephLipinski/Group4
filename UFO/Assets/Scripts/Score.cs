@@ -16,13 +16,18 @@ public class Score : MonoBehaviour {
             ShouldBeDeleted = true;
         }
     }
-
-    private void OnDestroy()
-    {
-        if(ShouldBeDeleted){
+    public void KillCrop(){
+        if (ShouldBeDeleted)
+        {
             ScoreManager.instance.UpdateScore(1);
-        } else {
+        }
+        else
+        {
             ScoreManager.instance.UpdateScore(-1);
         }
+    }
+    private void OnDestroy()
+    {
+        
     }
 }

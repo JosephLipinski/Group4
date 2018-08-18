@@ -25,14 +25,14 @@ public class LevelManager : MonoBehaviour {
         switch(level){
             case 1:
                 SceneManager.LoadScene("Level_Two");
-                ScoreManager.instance.UpdateScore(1464);
+                //ScoreManager.instance.UpdateScore(1464);
                 break;
             case 2:
-                ScoreManager.instance.UpdateScore(1464);
+                //ScoreManager.instance.UpdateScore(1464);
                 SceneManager.LoadScene("Level_Three");
                 break;
             case 3:
-                ScoreManager.instance.UpdateScore(1464);
+                //ScoreManager.instance.UpdateScore(1464);
                 SceneManager.LoadScene("Results");
                 break;
         }

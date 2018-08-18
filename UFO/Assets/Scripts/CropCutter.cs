@@ -33,6 +33,7 @@ public class CropCutter : MonoBehaviour {
 
     public void DestroyCrops(){
         foreach (GameObject crop in CollidingWith){
+            crop.GetComponent<Score>().KillCrop();
             Destroy(crop);
         }
         CollidingWith.Clear();
