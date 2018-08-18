@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class UFO_Controller : MonoBehaviour {
 
@@ -10,6 +11,12 @@ public class UFO_Controller : MonoBehaviour {
     public int currentStencilIndex;
     public bool isFirstPlayer;
     public float moveSpeed = 5f;
+    float xAxis, yAxis;
+
+    //Rewired
+    public int playerID;
+    Player player;
+
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +24,12 @@ public class UFO_Controller : MonoBehaviour {
         stencils.Insert(1, cutOutCircle);
         stencils.Insert(2, cutOutLine);
         SetActive();
+        if(isFirstPlayer){
+            playerID = 0;
+        } else {
+            playerID = 1;
+        }
+        player = ReInput.players.GetPlayer(playerID);
 	}
 	
 	// Update is called once per frame
@@ -24,60 +37,92 @@ public class UFO_Controller : MonoBehaviour {
         Vector3 movementVector = Vector3.zero;
         if (isFirstPlayer)
         {
-            if (Input.GetKey(KeyCode.W)){
-                movementVector += Vector3.forward;
-            }
-            if (Input.GetKey(KeyCode.A)){
+            
+            xAxis = player.GetAxis("Horizontal0");
+            yAxis = player.GetAxis("Vertical0");
+
+            if ((xAxis <= -.50f) || (Input.GetKey(KeyCode.A))){
                 movementVector += Vector3.left;
-            }
-            if (Input.GetKey(KeyCode.S)){
-                movementVector += Vector3.back;
-            }
-            if (Input.GetKey(KeyCode.D)){
+            } else if ((xAxis >= 0.50f) || (Input.GetKey(KeyCode.D))){
                 movementVector += Vector3.right;
             }
-            if(Input.GetKeyDown(KeyCode.LeftShift)){
+
+            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.W))){
+                movementVector += Vector3.forward;
+            } else if (((yAxis <= -0.50f) || Input.GetKey(KeyCode.S))){
+                movementVector += Vector3.back;
+            }
+
+            if ((Input.GetKeyDown(KeyCode.LeftShift)) || player.GetButtonDown("Swap0")){
                 ChangeCutOut();
                 SetActive();
             }
-            if (Input.GetKey(KeyCode.Q)){
+
+            if ((Input.GetKey(KeyCode.Q)) || (player.GetButton("RotateLeft0"))){
                 RotateCutOutLeft();
             }
-            if(Input.GetKey(KeyCode.E)){
+
+            if ((Input.GetKey(KeyCode.E)) || (player.GetButton("RotateRight0"))){
                 RotateCutOutRight();
             }
-            if(Input.GetKeyDown(KeyCode.F)){
+
+            if ((Input.GetKey(KeyCode.Q)) || (player.GetButton("RotateLeft0"))){
+                RotateCutOutLeft();
+            }
+
+            if(Input.GetKey(KeyCode.Z) || (player.GetButton("Shrink0"))){
+                stencils[currentStencilIndex].transform.localScale += (new Vector3(1f, 1f, 0) * Time.deltaTime * -1);
+            }
+
+            if(Input.GetKey(KeyCode.X) || player.GetButton("Grow0")){
+                stencils[currentStencilIndex].transform.localScale += (new Vector3(1f, 1f, 0) * Time.deltaTime);
+            }
+
+            if(Input.GetKeyDown(KeyCode.F) || player.GetButtonDown("Cut0")){
                 stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
             }
+
         } else {
-            if (Input.GetKey(KeyCode.I))
-            {
-                movementVector += Vector3.forward;
-            }
-            if (Input.GetKey(KeyCode.J))
-            {
+
+            xAxis = player.GetAxis("Horizontal1");
+            yAxis = player.GetAxis("Vertical1");
+
+            if ((xAxis <= -.50f) || (Input.GetKey(KeyCode.A))){
                 movementVector += Vector3.left;
-            }
-            if (Input.GetKey(KeyCode.K))
-            {
-                movementVector += Vector3.back;
-            }
-            if (Input.GetKey(KeyCode.L))
-            {
+            } else if ((xAxis >= 0.50f) || (Input.GetKey(KeyCode.D))){
                 movementVector += Vector3.right;
             }
-            if(Input.GetKeyDown(KeyCode.RightShift)){
+
+            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.W))){
+                movementVector += Vector3.forward;
+            } else if (((yAxis <= -0.50f) || Input.GetKey(KeyCode.S))){
+                movementVector += Vector3.back;
+            }
+
+            if((Input.GetKeyDown(KeyCode.RightShift)) || player.GetButtonDown("Swap1")){
                 ChangeCutOut();
                 SetActive();
             }
-            if(Input.GetKey(KeyCode.U)){
+
+            if((Input.GetKey(KeyCode.U)) || (player.GetButton("RotateLeft1"))){
                 RotateCutOutLeft();
             }
-            if (Input.GetKey(KeyCode.O))
-            {
+
+            if ((Input.GetKey(KeyCode.O)) || (player.GetButton("RotateRight1"))){
                 RotateCutOutRight();
             }
-            if(Input.GetKeyDown(KeyCode.H)){
+
+            if (Input.GetKey(KeyCode.M) || (player.GetButton("Shrink1")))
+            {
+                stencils[currentStencilIndex].transform.localScale += (new Vector3(1f, 1f, 0) * Time.deltaTime * -1);
+            }
+
+            if (Input.GetKey(KeyCode.Comma) || player.GetButton("Grow1"))
+            {
+                stencils[currentStencilIndex].transform.localScale += (new Vector3(1f, 1f, 0) * Time.deltaTime);
+            }
+
+            if (Input.GetKeyDown(KeyCode.H) || player.GetButtonDown("Cut1")){
                 stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
             }
         }
