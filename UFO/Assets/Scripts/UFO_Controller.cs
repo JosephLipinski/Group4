@@ -4,9 +4,9 @@ using UnityEngine;
 using Rewired;
 
 public class UFO_Controller : MonoBehaviour {
-
-    [HideInInspector]
-    public GameObject cutOutSquare, cutOutCircle, cutOutLine;
+    
+    //[HideInInspector]
+    public GameObject cutOutOne, cutOutTwo;
     public List<GameObject> stencils = new List<GameObject>(6);
     public int currentStencilIndex;
     public bool isFirstPlayer;
@@ -20,9 +20,9 @@ public class UFO_Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        stencils.Insert(0, cutOutSquare);
-        stencils.Insert(1, cutOutCircle);
-        stencils.Insert(2, cutOutLine);
+        stencils.Insert(0, cutOutOne);
+        stencils.Insert(1, cutOutTwo);
+
         SetActive();
         if(isFirstPlayer){
             playerID = 0;
@@ -79,7 +79,13 @@ public class UFO_Controller : MonoBehaviour {
             }
 
             if(Input.GetKeyDown(KeyCode.F) || player.GetButtonDown("Cut0")){
-                stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
+                CropCutter cutter = stencils[currentStencilIndex].GetComponent<CropCutter>();
+                if(cutter != null){
+                    cutter.DestroyCrops();
+                } else {
+                    cutter = stencils[currentStencilIndex].transform.GetChild(0).transform.GetComponent<CropCutter>();
+                    cutter.DestroyCrops();
+                }
             }
 
         } else {
@@ -123,7 +129,13 @@ public class UFO_Controller : MonoBehaviour {
             }
 
             if (Input.GetKeyDown(KeyCode.H) || player.GetButtonDown("Cut1")){
-                stencils[currentStencilIndex].GetComponent<CropCutter>().DestroyCrops();
+                CropCutter cutter = stencils[currentStencilIndex].GetComponent<CropCutter>();
+                if (cutter != null){
+                    cutter.DestroyCrops();
+                } else {
+                    cutter = stencils[currentStencilIndex].transform.GetChild(0).transform.GetComponent<CropCutter>();
+                    cutter.DestroyCrops();
+                }
             }
         }
         transform.Translate(movementVector * moveSpeed * Time.deltaTime);

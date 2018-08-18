@@ -18,6 +18,19 @@ public class CropCutter : MonoBehaviour {
             CollidingWith.Remove(other.gameObject);
     }
 
+    private void OnCollisionEnter(Collision collision){
+        Debug.Log("Colliding");
+        if(collision.gameObject.tag == "Crop"){
+            CollidingWith.Add(collision.gameObject);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision){
+        if(collision.gameObject.tag == "Crop"){
+            CollidingWith.Remove(collision.gameObject);
+        }
+    }
+
     public void DestroyCrops(){
         foreach (GameObject crop in CollidingWith){
             Destroy(crop);

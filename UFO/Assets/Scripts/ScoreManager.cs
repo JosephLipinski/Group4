@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
-
+    
     public static ScoreManager instance = null;
     [HideInInspector]
     public float score;
@@ -22,7 +22,9 @@ public class ScoreManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         score = 0;
+        scoreText = GameObject.Find("Canvas/suspicionBar/ScoreText").GetComponent<Text>();
         scoreText.text = "Score: " + score.ToString();
+        DontDestroyOnLoad(gameObject);
 	}
 
     public void UpdateScore(float scoreToApply){

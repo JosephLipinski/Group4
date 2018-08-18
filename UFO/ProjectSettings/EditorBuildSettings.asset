@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/ControlsScreen.unity
     guid: 7d31cf9b462ceb440807459f53e5a8ef
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Level_One.unity
+    guid: 1e6d79b9e5a074928ad30fd716f75df5
+  - enabled: 1
+    path: Assets/Scenes/Level_Two.unity
+    guid: 19ec3c8906ff443e5ac8fbd9704c476c
+  - enabled: 1
+    path: Assets/Scenes/Level_Three.unity
+    guid: a54a4a7ff3bcb4c25894ebbade133ae0
+  - enabled: 1
+    path: Assets/Scenes/Results.unity
+    guid: e9c2de0eac1f048aea9b113245dcb98e
   m_configObjects: {}

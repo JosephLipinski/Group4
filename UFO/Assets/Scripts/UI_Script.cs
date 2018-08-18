@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class UI_Script : MonoBehaviour {
 
-    public GameObject panelOne, panelTwo;
+    public GameObject panelOne;
     GameObject activePanel;
 
 	// Use this for initialization
 	void Start () {
         panelOne.SetActive(true);
-        panelTwo.SetActive(false);
 	}
 
     public void ViewControlls(){
@@ -22,7 +21,7 @@ public class UI_Script : MonoBehaviour {
     }
 
     public void StartGame(){
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level_One");
     }
 
     public void QuitGame(){

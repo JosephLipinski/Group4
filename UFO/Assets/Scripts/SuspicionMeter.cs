@@ -11,12 +11,13 @@ public class SuspicionMeter: MonoBehaviour {
 
     Image meter;
     float suspicionLevel;
-    int currentLevel = 1;
+    int currentLevel;
 
 	// Use this for initialization
 	void Start () {
         meter = GetComponent<Image>();
         meter.fillAmount = 0;
+        currentLevel = LevelManager.instance.GetLevel();
 	}
 	
 	// Update is called once per frame
