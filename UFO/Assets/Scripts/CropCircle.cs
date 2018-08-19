@@ -17,7 +17,13 @@ public class CropCircle : MonoBehaviour {
 	}
 	
     IEnumerator Fade(){
-        yield return new WaitForSecondsRealtime(3.0f);
+        while (255 - (fadeAmount * index) >= 0){
+            m_material.color = new Color(255, 255, 255, (255 - (fadeAmount * index)));
+            Debug.Log("HIT");
+            index++;
+            yield return new WaitForSeconds(0.3f);
+        }
+        //yield return new WaitForSecondsRealtime(3.0f);
         Destroy(gameObject);
 
     }
