@@ -18,7 +18,7 @@ public class CropCircle : MonoBehaviour {
 	
     IEnumerator Fade(){
         while (255 - (fadeAmount * index) >= 0){
-            m_material.color = new Color(255, 255, 255, (255 - (fadeAmount * index)));
+            //m_material.color = new Color(255, 255, 255, (255 - (fadeAmount * index)));
             Debug.Log("HIT");
             index++;
             yield return new WaitForSeconds(0.3f);
