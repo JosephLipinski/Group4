@@ -93,15 +93,15 @@ public class UFO_Controller : MonoBehaviour {
             xAxis = player.GetAxis("Horizontal1");
             yAxis = player.GetAxis("Vertical1");
 
-            if ((xAxis <= -.50f) || (Input.GetKey(KeyCode.A))){
+            if ((xAxis <= -.50f) || (Input.GetKey(KeyCode.J))){
                 movementVector += Vector3.left;
-            } else if ((xAxis >= 0.50f) || (Input.GetKey(KeyCode.D))){
+            } else if ((xAxis >= 0.50f) || (Input.GetKey(KeyCode.L))){
                 movementVector += Vector3.right;
             }
 
-            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.W))){
+            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.K))){
                 movementVector += Vector3.forward;
-            } else if (((yAxis <= -0.50f) || Input.GetKey(KeyCode.S))){
+            } else if (((yAxis <= -0.50f) || Input.GetKey(KeyCode.K))){
                 movementVector += Vector3.back;
             }
 
