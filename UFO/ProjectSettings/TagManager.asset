@@ -22,7 +22,7 @@ TagManager:
   - Farmer
   - Crop
   - PatrolPoint
-  - 
+  - CropCircle
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Farmer
+    uniqueID: 2512340271
     locked: 0

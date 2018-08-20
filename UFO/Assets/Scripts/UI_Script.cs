@@ -21,6 +21,9 @@ public class UI_Script : MonoBehaviour {
     }
 
     public void StartGame(){
+        if(ScoreManager.instance != null){
+            ScoreManager.instance.SetScore();
+        }
         SceneManager.LoadScene("Level_One");
     }
 

@@ -27,12 +27,16 @@ public class ScoreManager : MonoBehaviour {
 
     public void UpdateScore(int scoreToApply){
         score += scoreToApply;
-        Debug.Log("HER");
+        //Debug.Log("HER");
         //scoreText = GameObject.Find("Canvas/suspicionBar/ScoreText").GetComponent<Text>();
        // scoreText.text = "Score: " + score.ToString();
     }
 
     public float GetScore(){
         return score;
+    }
+
+    public void SetScore(){
+        score = 0;
     }
 }

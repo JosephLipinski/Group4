@@ -12,6 +12,7 @@ public class UFO_Controller : MonoBehaviour {
     public bool isFirstPlayer;
     public float moveSpeed = 5f;
     float xAxis, yAxis;
+    AudioSource audioSource;
 
     //Rewired
     public int playerID;
@@ -20,6 +21,7 @@ public class UFO_Controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        audioSource = GetComponent<AudioSource>();
         stencils.Insert(0, cutOutOne);
         stencils.Insert(1, cutOutTwo);
 
@@ -86,6 +88,8 @@ public class UFO_Controller : MonoBehaviour {
                     cutter = stencils[currentStencilIndex].transform.GetChild(0).transform.GetComponent<CropCutter>();
                     cutter.DestroyCrops();
                 }
+                if(!audioSource.isPlaying)
+                    audioSource.Play();
             }
 
         } else {
@@ -99,7 +103,7 @@ public class UFO_Controller : MonoBehaviour {
                 movementVector += Vector3.right;
             }
 
-            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.K))){
+            if ((yAxis >= 0.50f) || (Input.GetKey(KeyCode.I))){
                 movementVector += Vector3.forward;
             } else if (((yAxis <= -0.50f) || Input.GetKey(KeyCode.K))){
                 movementVector += Vector3.back;
@@ -136,6 +140,8 @@ public class UFO_Controller : MonoBehaviour {
                     cutter = stencils[currentStencilIndex].transform.GetChild(0).transform.GetComponent<CropCutter>();
                     cutter.DestroyCrops();
                 }
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
             }
         }
         transform.Translate(movementVector * moveSpeed * Time.deltaTime);
